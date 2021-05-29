@@ -60,3 +60,7 @@ sudo docker build . -t videosesdonustur
 ```
 sudo docker run videosesdonustur
 ```
+
+### Telif Hakkı ve Lisans
+- Copyright &copy; 2021 &mdash; [Türkçe Botlar Sohbet](https://t.me/botsohbet)
+- [MIT License](./LICENSE)
