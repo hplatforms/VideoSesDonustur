@@ -3,6 +3,7 @@ from bot import app, data, sudo_users
 from bot.helper.utils import add_task
 
 video_mimetype = [
+  "video/ts",
   "video/x-flv",
   "video/mp4",
   "video/mkv",
