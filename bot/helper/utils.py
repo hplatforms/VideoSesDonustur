@@ -13,7 +13,7 @@ def on_task_complete():
 def add_task(message: Message):
     try:
       c_time = time.time()
-      msg = message.reply_text("```Video Yükleniyor...```", quote=True)
+      msg = message.reply_text("```Video İşleme Alındı...```", quote=True)
       filepath = message.download(
                 file_name=download_dir,
                 progress=progress_for_pyrogram,
@@ -25,13 +25,18 @@ def add_task(message: Message):
       msg.edit("```Video Kodlanıyor...```")
       new_file = encode(filepath)
       if new_file:
-        msg.edit("```Video Kodlandı, Metadata Veriler Alınıyor...```")
+        msg.edit("```Video Kodlandı, Veriler Alınıyor...```")
         duration = get_duration(new_file)
         thumb = get_thumbnail(new_file, download_dir, duration / 4)
         width, height = get_width_height(new_file)
-        msg.edit("```Video yükleniyor...```")
+        base_file_name = os.path.basename(new_file)
+        caption_str = ""
+        caption_str += "<code>"
+        caption_str += base_file_name
+        caption_str += "</code>"
         message.reply_video(
-                new_file, 
+                new_file,
+                caption=caption_str,
                 quote=True, 
                 supports_streaming=True, 
                 thumb=thumb, 
@@ -40,13 +45,13 @@ def add_task(message: Message):
                 height=height,
                 progress=progress_for_pyrogram,
                 progress_args=(
-                    "Yükleniyor...",
+                    f"{os.path.basename(new_file)} Yükleniyor...",
                     msg,
                     c_time
                 ))
         os.remove(new_file)
         os.remove(thumb)
-        msg.edit("```Video Başarıyla Kodlandı.```")
+        msg.edit("```İşlem Bitti.```")
       else:
         msg.edit("```Dosyanızı kodlarken bir şeyler ters gitti.```")
         os.remove(filepath)
