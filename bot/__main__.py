@@ -29,7 +29,7 @@ def encode_video(app, message):
       if not message.document.mime_type in video_mimetype:
         message.reply_text("```Geçersiz Video !\nBu video dosyasına benzemiyor.```", quote=True)
         return
-    message.reply_text("```Sıraya alındı...```", quote=True)
+    message.reply_text("```Sıraya Alındı...```", quote=True)
     data.append(message)
     if len(data) == 1:
       add_task(message)
