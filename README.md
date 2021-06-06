@@ -64,3 +64,5 @@ sudo docker run videosesdonustur
 ### Telif Hakkı ve Lisans
 - Copyright &copy; 2021 &mdash; [Türkçe Botlar Sohbet](https://t.me/botsohbet)
 - [MIT License](./LICENSE)
+
+<a href="https://www.digitalocean.com/?refcode=8a7a2b148ace&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%203.svg" alt="DigitalOcean Referral Badge" /></a>
