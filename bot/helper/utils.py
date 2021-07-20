@@ -51,7 +51,7 @@ def add_task(message: Message):
                 ))
         os.remove(new_file)
         os.remove(thumb)
-        msg.edit("`🔴 İşlem Bitti. ✔️`")
+        msg.edit("`İşlem Bitti. ✔️`")
       else:
         msg.edit("`Dosyanızı kodlarken bir şeyler ters gitti.`")
         os.remove(filepath)
