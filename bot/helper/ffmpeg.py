@@ -7,15 +7,26 @@ from subprocess import call, check_output
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 
-def get_codec(filepath, channel='v:0'):
-    output = check_output(['ffprobe', '-v', 'error', '-select_streams', channel,
-                            '-show_entries', 'stream=codec_name,codec_tag_string', '-of', 
-                            'default=nokey=1:noprint_wrappers=1', filepath])
-    return output.decode('utf-8').split()
+def get_codec(filepath, channel="v:0"):
+    output = check_output(
+        [
+            "ffprobe",
+            "-v",
+            "error",
+            "-select_streams",
+            channel,
+            "-show_entries",
+            "stream=codec_name,codec_tag_string",
+            "-of",
+            "default=nokey=1:noprint_wrappers=1",
+            filepath,
+        ]
+    )
+    return output.decode("utf-8").split()
 
 def encode(filepath):
     basefilepath, extension = os.path.splitext(filepath)
-    output_filepath = basefilepath + '.[AAC]' + '.mp4'
+    output_filepath = basefilepath + '.AAC' + '.mp4'
     assert(output_filepath != filepath)
     if os.path.isfile(output_filepath):
         print('"{}" Atlanıyor: dosya zaten var'.format(output_filepath))
