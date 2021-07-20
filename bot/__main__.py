@@ -1,5 +1,5 @@
 from pyrogram import filters
-from bot import app, data, sudo_users
+from bot import app, data
 from bot.helper.utils import add_task
 
 video_mimetype = [
@@ -22,14 +22,14 @@ video_mimetype = [
 @app.on_message(filters.incoming & filters.command(['start', 'help']))
 def help_message(app, message):
     message.reply_text(f"Merhaba {message.from_user.mention()}\nHiç sesi olmayan Telegram videolarını sesli olarak kodlayabilirim, sadece bana sesi olmayan bir video gönder.", quote=True)
-
-@app.on_message(filters.user(sudo_users) & filters.incoming & (filters.video | filters.document))
+    
+@app.on_message(filters.incoming & (filters.video | filters.document))
 def encode_video(app, message):
     if message.document:
       if not message.document.mime_type in video_mimetype:
         message.reply_text("```Geçersiz Video !\nBu video dosyasına benzemiyor.```", quote=True)
         return
-    message.reply_text("```Sıraya Alındı...```", quote=True)
+    message.reply_text(f"`✔️ Sıraya Eklendi...\nPozisyon: {len(data)}\n\n🥺 Lütfen sabırlı olun...\n\n#kuyruk`", quote=True)
     data.append(message)
     if len(data) == 1:
       add_task(message)
