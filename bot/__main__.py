@@ -1,6 +1,8 @@
 from pyrogram import filters
 from bot import app, data, sudo_users
 from bot.helper.utils import add_task
+from pyrogram.types.bots_and_keyboards import InlineKeyboardButton, InlineKeyboardMarkup
+from .translation import Translation
 
 video_mimetype = [
   "video/x-flv",
@@ -21,7 +23,19 @@ video_mimetype = [
 
 @app.on_message(filters.user(sudo_users) & filters.incoming & filters.command(['start', 'help']))
 def help_message(app, message):
-    message.reply_text(f"Merhaba {message.from_user.mention()}\nHiç sesi olmayan Telegram videolarını sesli olarak kodlayabilirim, sadece bana sesi olmayan bir video gönder.", quote=True)
+        message.reply_text(
+            text=Translation.START_TEXT.format(message.from_user.mention()),
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            "Destek", url="https://t.me/botsohbet"
+                        )
+                    ]
+                ]
+            ),
+            reply_to_message_id=message.message_id
+        ) 
     
 @app.on_message(filters.user(sudo_users) & filters.incoming & (filters.video | filters.document))
 def encode_video(app, message):
