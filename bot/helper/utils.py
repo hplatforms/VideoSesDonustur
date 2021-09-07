@@ -53,7 +53,7 @@ def add_task(message: Message):
         os.remove(thumb)
         msg.edit("`İşlem Bitti. ✔️`")
       else:
-        msg.edit("`Dosyanızı kodlarken bir şeyler ters gitti.`")
+        msg.edit("`Dosyanızı kodlarken bir şeyler ters gitti.\nBu videonun sesi yok.`")
         os.remove(filepath)
     except Exception as e:
       msg.edit(f"```{e}```")
