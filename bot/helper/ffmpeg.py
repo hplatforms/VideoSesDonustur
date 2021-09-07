@@ -1,6 +1,4 @@
 import os
-import sys
-import json
 import time
 import ffmpeg
 from subprocess import call, check_output
@@ -35,8 +33,9 @@ def encode(filepath):
     # Get the audio channel codec
     audio_codec = get_codec(filepath, channel='a:0')
     if audio_codec == []:
-        audio_opts = ''
-    elif audio_codec[0] == 'aac':
+        print('Skipping: no audio codec reported')
+        return None
+    if audio_codec[0] == 'aac':
         audio_opts = '-c:v copy'
     else:
         audio_opts = '-c:a aac -c:v copy'
