@@ -1,5 +1,5 @@
 from pyrogram import filters
-from bot import app, data, sudo_users
+from bot import app, data
 from bot.helper.utils import add_task
 from pyrogram.types.bots_and_keyboards import InlineKeyboardButton, InlineKeyboardMarkup
 from .translation import Translation
@@ -21,7 +21,7 @@ video_mimetype = [
   "video/mpeg"
   ]
 
-@app.on_message(filters.user(sudo_users) & filters.incoming & filters.command(['start', 'help']))
+@app.on_message(filters.incoming & filters.command(['start', 'help']))
 def help_message(app, message):
         message.reply_text(
             text=Translation.START_TEXT.format(message.from_user.mention()),
@@ -37,15 +37,15 @@ def help_message(app, message):
             reply_to_message_id=message.message_id
         ) 
     
-@app.on_message(filters.user(sudo_users) & filters.incoming & (filters.video | filters.document))
-def encode_video(app, message):
+@app.on_message(filters.incoming & (filters.video | filters.document))
+async def encode_video(app, message):
     if message.document:
       if not message.document.mime_type in video_mimetype:
-        message.reply_text("```Geçersiz Video !\nBu video dosyasına benzemiyor.```", quote=True)
+        await message.reply_text("```Geçersiz Video !\nBu video dosyasına benzemiyor.```", quote=True)
         return
-    message.reply_text(f"`✔️ Sıraya Eklendi...\nPozisyon: {len(data)}\n\n🥺 Lütfen sabırlı olun...\n\n#kuyruk`", quote=True)
+    await message.reply_text(f"`✔️ Sıraya Eklendi...\nSıra: {len(data)}\n\nSabırlı olun...\n\n#kuyruk`", quote=True)
     data.append(message)
     if len(data) == 1:
-      add_task(message)
+      await add_task(message)
 
 app.run()
