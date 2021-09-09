@@ -5,16 +5,16 @@ from pyrogram.types import Message
 from .ffmpeg import encode, get_thumbnail, get_duration, get_width_height
 from bot.progress import progress_for_pyrogram
 
-def on_task_complete():
+async def on_task_complete():
     del data[0]
     if len(data) > 0:
-      add_task(data[0])
+        await add_task(data[0])
 
-def add_task(message: Message):
+async def add_task(message: Message):
     try:
       c_time = time.time()
-      msg = message.reply_text("`🟡 Video İşleme Alındı... 🟡\n\n⚙️ Motor: Pyrogram\n\n#indirme`", quote=True)
-      filepath = message.download(
+      msg = await message.reply_text("`🟡 Video İşleme Alındı... 🟡\n\n⚙️ Motor: Pyrogram\n\n#indirme`", quote=True)
+      filepath = await message.download(
                 file_name=download_dir,
                 progress=progress_for_pyrogram,
                 progress_args=(
@@ -22,10 +22,10 @@ def add_task(message: Message):
                     msg,
                     c_time
                 ))
-      msg.edit("`🟣 Video Kodlanıyor... 🟣\n\n⚙️ Motor: FFMPEG\n\n#kodlama`")
+      await msg.edit("`🟣 Video Kodlanıyor... 🟣\n\n⚙️ Motor: FFMPEG\n\n#kodlama`")
       new_file = encode(filepath)
       if new_file:
-        msg.edit("`🟢 Video Kodlandı, Veriler Alınıyor... 🟢`")
+        await msg.edit("`🟢 Video Kodlandı, Veriler Alınıyor... 🟢`")
         duration = get_duration(new_file)
         thumb = get_thumbnail(new_file, download_dir, duration / 4)
         width, height = get_width_height(new_file)
@@ -34,7 +34,7 @@ def add_task(message: Message):
         caption_str += "<code>"
         caption_str += base_file_name
         caption_str += "</code>"
-        message.reply_video(
+        await message.reply_video(
                 new_file,
                 caption=caption_str,
                 quote=True,
@@ -51,10 +51,10 @@ def add_task(message: Message):
                 ))
         os.remove(new_file)
         os.remove(thumb)
-        msg.edit("`İşlem Bitti. ✔️`")
+        await msg.edit("`İşlem Bitti. ✔️`")
       else:
-        msg.edit("`Dosyanızı kodlarken bir şeyler ters gitti.\nBu videonun sesi yok.`")
+        await msg.edit("`🔴 Dosyanızı kodlarken bir şeyler ters gitti.\n\nBu videonun sesi yok.`")
         os.remove(filepath)
     except Exception as e:
-      msg.edit(f"```{e}```")
-    on_task_complete()
+      await msg.edit(f"**🔴 HATA 🔴**:\n\n`{e}`\n\n#hata")
+    await on_task_complete()
