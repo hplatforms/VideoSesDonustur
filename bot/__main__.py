@@ -37,15 +37,15 @@ def help_message(app, message):
             reply_to_message_id=message.message_id
         ) 
     
-@app.on_message(filters.user(sudo_users) & filters.incoming & (filters.video | filters.document))
-async def encode_video(app, message):
+@app.on_message(filters.incoming & (filters.video | filters.document))
+def encode_video(app, message):
     if message.document:
       if not message.document.mime_type in video_mimetype:
-        await message.reply_text("```Geçersiz Video !\nBu video dosyasına benzemiyor.```", quote=True)
+        message.reply_text("```Geçersiz Video !\nBu video dosyasına benzemiyor.```", quote=True)
         return
-    await message.reply_text(f"`✔️ Sıraya Eklendi...\nSıra: {len(data)}\n\nSabırlı olun...\n\n#kuyruk`", quote=True)
+    message.reply_text(f"`✔️ Sıraya Eklendi...\nSıra: {len(data)}\n\nSabırlı olun...\n\n#kuyruk`", quote=True)
     data.append(message)
     if len(data) == 1:
-      await add_task(message)
+      add_task(message)
 
 app.run()
