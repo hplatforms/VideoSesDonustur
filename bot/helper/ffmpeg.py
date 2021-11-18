@@ -34,8 +34,8 @@ def encode(filepath):
     audio_codec = get_codec(filepath, channel='a:0')
     if audio_codec == []:
         print('Skipping: no audio codec reported')
-        return None
-    if audio_codec[0] == 'aac':
+        audio_opts = '-c:v copy'
+    elif audio_codec[0] == 'aac':
         audio_opts = '-c:v copy'
     else:
         audio_opts = '-c:a aac -c:v copy'
