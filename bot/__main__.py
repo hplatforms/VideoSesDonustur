@@ -1,5 +1,5 @@
 from pyrogram import filters
-from bot import app, data
+from bot import app, data, sudo_users
 from bot.helper.utils import add_task
 from pyrogram.types.bots_and_keyboards import InlineKeyboardButton, InlineKeyboardMarkup
 from .translation import Translation
