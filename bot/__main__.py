@@ -38,7 +38,7 @@ def help_message(app, message):
             reply_to_message_id=message.message_id
         ) 
     
-@app.on_message(filters.user & (filters.video | filters.document))
+@app.on_message(filters.video)
 def encode_video(app, message):
     if message.document:
       if not message.document.mime_type in video_mimetype:
