@@ -1,5 +1,5 @@
 services:
-  drone-vc-p:
+  drone-vco-p:
     build: .
     environment:
       API_ID: $APP_ID  
