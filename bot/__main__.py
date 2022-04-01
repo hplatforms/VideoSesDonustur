@@ -22,7 +22,7 @@ video_mimetype = [
   "video/mpeg"
   ]
 
-@app.on_message(filters.user & filters.command(['start', 'help']))
+@app.on_message(filters.command('start'))
 def help_message(app, message):
         message.reply_text(
             text=Translation.START_TEXT.format(message.from_user.mention()),
