@@ -12,4 +12,4 @@ services:
     resources:
       cpu: 1000m
       memory: 3Gi
-    command: python3 start.sh
+    command: python3 -m bot
