@@ -22,7 +22,7 @@ video_mimetype = [
   "video/mpeg"
   ]
 
-@app.on_message(filters.user & filters.incoming & filters.command(['start', 'help']))
+@app.on_message(filters.user & filters.command(['start', 'help']))
 def help_message(app, message):
         message.reply_text(
             text=Translation.START_TEXT.format(message.from_user.mention()),
@@ -38,7 +38,7 @@ def help_message(app, message):
             reply_to_message_id=message.message_id
         ) 
     
-@app.on_message(filters.user & filters.incoming & (filters.video | filters.document))
+@app.on_message(filters.user & (filters.video | filters.document))
 def encode_video(app, message):
     if message.document:
       if not message.document.mime_type in video_mimetype:
