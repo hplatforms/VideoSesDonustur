@@ -1,4 +1,14 @@
 from pyrogram import filters
+from pyrogram import filters
+import requests
+import heroku3
+
+from pyrogram import filters
+from pyrogram.types import (
+    Message
+)
+from pyrogram import Client
+
 from bot import app, data, sudo_users, heroku_api_key, heroku_app_name
 from bot.helper.utils import add_task
 from pyrogram.types.bots_and_keyboards import InlineKeyboardButton, InlineKeyboardMarkup
