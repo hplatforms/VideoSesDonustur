@@ -11,7 +11,9 @@ from pyrogram.types import (
 )
 from pyrogram import Client
 
-@app.on_message(filters.command("restart") & filters.user(OWNER_ID))
+SUDO_USERS = list(set(int(x) for x in os.environ.get("SUDO_USERS").split()))
+
+@app.on_message(filters.command("restart") & filters.user(SUDO_USERS))
 async def restart(_, m: Message):
     restart_message = await m.reply_text(text="`İntihar ediyom bekle...`")
     await restart_message.edit("`Ölmek üzereyim...`")
