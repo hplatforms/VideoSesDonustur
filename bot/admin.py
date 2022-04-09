@@ -1,7 +1,3 @@
-import shutil
-import psutil
-import math
-
 import requests
 import heroku3
 
