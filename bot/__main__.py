@@ -53,9 +53,9 @@ async def restart(_, m: Message):
     restart_message = await m.reply_text(text="`İntihar ediyom bekle...`")
     await restart_message.edit("`Ölmek üzereyim...`")
     try:
-        if HEROKU_API_KEY is not None:
-            heroku_conn = heroku3.from_key(HEROKU_API_KEY)
-            server = heroku_conn.app(HEROKU_APP_NAME)
+        if heroku_api_key is not None:
+            heroku_conn = heroku3.from_key(heroku_api_key)
+            server = heroku_conn.app(heroku_app_name)
             server.restart()
         else:
             await restart_message.edit("`Heroku Api Key ve uygulama adını ekleyin.`")
