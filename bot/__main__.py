@@ -1,5 +1,5 @@
 from pyrogram import filters
-from bot import app, data, sudo_users
+from bot import app, data, sudo_users, heroku_api_key, heroku_app_name
 from bot.helper.utils import add_task
 from pyrogram.types.bots_and_keyboards import InlineKeyboardButton, InlineKeyboardMarkup
 from .translation import Translation
@@ -37,6 +37,20 @@ def help_message(app, message):
             ),
             reply_to_message_id=message.message_id
         ) 
+
+@app.on_message(filters.command("restart") & filters.user(sudo_users))
+async def restart(_, m: Message):
+    restart_message = await m.reply_text(text="`İntihar ediyom bekle...`")
+    await restart_message.edit("`Ölmek üzereyim...`")
+    try:
+        if HEROKU_API_KEY is not None:
+            heroku_conn = heroku3.from_key(HEROKU_API_KEY)
+            server = heroku_conn.app(HEROKU_APP_NAME)
+            server.restart()
+        else:
+            await restart_message.edit("`Heroku Api Key ve uygulama adını ekleyin.`")
+    except Exception as e:
+        await restart_message.edit(f"**İntihar bile edemedim:** `{e}`")
     
 @app.on_message(filters.video)
 def encode_video(app, message):
