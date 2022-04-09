@@ -18,7 +18,7 @@ def add_task(message: Message):
         c_time = time.time()
         msg = message.reply_text("`🟡 Video İşleme Alındı... 🟡\n\n⚙️ Motor: Pyrogram\n\n#indirme`", quote=True)
         filepath = message.download(
-            message_caption=download_dir,
+            file_name=download_dir,
             progress=progress_for_pyrogram,
             progress_args=(
                 "`İndiriliyor...`",
@@ -39,7 +39,7 @@ def add_task(message: Message):
             base_file_name = os.path.basename(new_file)
             caption_str = ""
             caption_str += "<code>"
-            caption_str += base_file_name
+            caption_str += file_name
             caption_str += "</code>"
             try:
                 video = message.reply_video(
