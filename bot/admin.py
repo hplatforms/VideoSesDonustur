@@ -11,9 +11,9 @@ SUDO_USERS = list(set(int(x) for x in os.environ.get("SUDO_USERS").split()))
 HEROKU_APP_NAME = environ.get('HEROKU_APP_NAME', None)
 HEROKU_API_KEY = environ.get('HEROKU_API_KEY', None)
 
-@app.on_message(filters.command("restart") & filters.user(SUDO_USERS))
+@app.on_message(filters.command("restart"))
 async def restart(_, m: Message):
-    restart_message = await m.reply_text(text="`İntihar ediyom bekle...`")
+    restart_message = await message.reply_text(text="`İntihar ediyom bekle...`")
     await restart_message.edit("`Ölmek üzereyim...`")
     try:
         if HEROKU_API_KEY is not None:
