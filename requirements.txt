@@ -3,3 +3,4 @@ tgCrypto
 python-dotenv
 hachoir
 ffmpeg-python
+heroku3
