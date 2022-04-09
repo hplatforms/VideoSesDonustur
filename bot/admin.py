@@ -1,4 +1,4 @@
-@Client.on_message(filters.command("restart") & filters.user(OWNER_ID))
+@app.on_message(filters.command("restart") & filters.user(OWNER_ID))
 async def restart(_, m: Message):
     restart_msg = await m.reply_text(text="`İntihar ediyom bekle...`")
     await restart_msg.edit("`Ölmek üzereyim...`")
