@@ -4,7 +4,4 @@ python-dotenv
 hachoir
 ffmpeg-python
 heroku3
-math
-psutil
-shutil
 requests
