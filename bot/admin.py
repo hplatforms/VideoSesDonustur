@@ -5,13 +5,10 @@ import math
 import requests
 import heroku3
 
-from config import HEROKU_APP_NAME, HEROKU_API_KEY
-
 from pyrogram import filters
 from pyrogram.types import (
     Message
 )
-from config import OWNER_ID
 from pyrogram import Client
 
 @app.on_message(filters.command("restart") & filters.user(OWNER_ID))
