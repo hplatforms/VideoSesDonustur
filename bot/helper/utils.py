@@ -5,7 +5,7 @@ from pyrogram.types import Message
 from .ffmpeg import encode, get_thumbnail, get_duration, get_width_height, get_codec
 from pyrogram.errors import FloodWait, MessageNotModified
 from bot.progress import progress_for_pyrogram
-
+from bot import app, data, log_channel
 
 def on_task_complete():
     del data[0]
@@ -59,7 +59,7 @@ def add_task(message: Message):
                     ))
 
                 if LOG_CHANNEL:
-                    await document.copy(LOG_CHANNEL)
+                    await document.copy(log_channel)
             else:
                 width, height, duration = await VideoMetaData(download_directory)
                 if os.path.exists(thumb_image_path):
@@ -69,7 +69,7 @@ def add_task(message: Message):
                 await update.message.reply_to_message.reply_chat_action("upload_video")
                 video = await bot.send_video(
                     chat_id=update.message.chat.id,
-                    video=download_directory,
+                    video=new_file,
                     caption=caption,
                     duration=duration,
                     width=width,
@@ -79,15 +79,11 @@ def add_task(message: Message):
                     thumb=thumb_image_path,
                     reply_to_message_id=update.message.reply_to_message.message_id,
                     progress=progress_for_pyrogram,
-                    parse_mode='html',
-                    progress_args=(
-                        Translation.UPLOAD_START,
-                        update.message,
-                        start_time
+                    parse_mode='html'
                     )
                 )
-                if LOG_CHANNEL:
-                    await video.copy(LOG_CHANNEL)
+                if log_channel:
+                    await video.copy(log_channel)
 
             if tg_send_type == "audio":
                 duration = await AudioMetaData(download_directory)
@@ -102,15 +98,11 @@ def add_task(message: Message):
                     thumb=thumbnail,
                     reply_to_message_id=update.message.reply_to_message.message_id,
                     # reply_markup=reply_markup,
-                    progress=progress_for_pyrogram,
-                    progress_args=(
-                        Translation.UPLOAD_START,
-                        update.message,
-                        start_time
+                    progress=progress_for_pyrogram
                     )
                 )
-                if LOG_CHANNEL:
-                    await audio.copy(LOG_CHANNEL)
+                if log_channel:
+                    await audio.copy(log_channel)
             elif tg_send_type == "vm":
                 width, duration = await VMMetaData(download_directory)
                 thumbnail = await VideoThumb(bot, update, duration, download_directory)
@@ -123,15 +115,11 @@ def add_task(message: Message):
                     thumb=thumbnail,
                     reply_to_message_id=update.message.reply_to_message.message_id,
                     # reply_markup=reply_markup,
-                    progress=progress_for_pyrogram,
-                    progress_args=(
-                        Translation.UPLOAD_START,
-                        update.message,
-                        start_time
+                    progress=progress_for_pyrogram
                     )
                 )
-                if LOG_CHANNEL:
-                    await video_note.copy(LOG_CHANNEL)
+                if log_channel:
+                    await video_note.copy(log_channel)
                 if audio_codec == []:
 
                     video.reply_text("`⚪️ Bu videonun sesi yoktu ama yine de kodladım.\n\n#bilgilendirme`", quote=True)
