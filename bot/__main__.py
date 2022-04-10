@@ -93,5 +93,8 @@ def encode_video(app, message):
                     await self.send_message(text=texto, chat_id=owner)
             except Exception as t:
                 LOGGER.warning(str(t))
+        await super().stop()
+        LOGGER.info(msg="App Stopped.")
+        exit()
 
 app.run()
