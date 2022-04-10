@@ -99,7 +99,6 @@ async def restart(_, m: Message):
             server.restart() 
             await restart_message.edit('`Senin ellerinde can verdim kurt bakışlım.`')
             time.sleep(2)
-            return output
         else:
             await restart_message.edit("`Heroku Api Key ve uygulama adını ekleyin.`")
     except Exception as e:
