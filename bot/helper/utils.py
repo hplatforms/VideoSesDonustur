@@ -75,7 +75,7 @@ def add_task(message: Message):
                     progress=progress_for_pyrogram,
                     parse_mode='html'
                     )
-                )
+                    )
                 if log_channel:
                     await video.copy(log_channel)
 
@@ -111,7 +111,7 @@ def add_task(message: Message):
                     # reply_markup=reply_markup,
                     progress=progress_for_pyrogram
                     )
-                )
+                    )
                 if log_channel:
                     await video_note.copy(log_channel)
                 if audio_codec == []:
