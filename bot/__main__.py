@@ -88,10 +88,9 @@ def help_message(app, message):
             reply_to_message_id=message.message_id
         ) 
 
-@app.on_message(filters.command("restart") & filters.user(sudo_users))
+@app.on_message(filters.command("restart"))
 async def restart(_, m: Message):
-    restart_message = await m.reply_text(text="`İntihar ediyom bekle...`")
-    await restart_message.edit("`Ölmek üzereyim...\nbana hayat verdiğin için teşekkürler😢`")
+    restart_message = await m.reply_text(text="`Ölmek üzereyim...\nbana hayat verdiğin için teşekkürler😢`")
     try:
         if heroku_api_key is not None:
             heroku_conn = heroku3.from_key(heroku_api_key)
