@@ -5,7 +5,6 @@ from pyrogram.types import Message
 from .ffmpeg import encode, get_thumbnail, get_duration, get_width_height, get_codec
 from pyrogram.errors import FloodWait, MessageNotModified
 from bot.progress import progress_for_pyrogram
-from bot import app, data, log_channel
 
 def on_task_complete():
     del data[0]
