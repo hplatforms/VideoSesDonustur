@@ -40,19 +40,19 @@ async def start(self):
             except Exception as t:
                 LOGGER.error(str(t))
 
-    async def stop(self, *args):
-        if owner != 0:
-            texto = f"BUGÜN BENİM ÖLÜM GÜNÜM.\nYAŞADIĞIM SÜRE: `{ReadableTime(time.time() - botStartTime)}`"
-            try:
-                if send_logs_when_dying:
-                    await self.send_document(document='log.txt', caption=texto, chat_id=owner)
-                else:
-                    await self.send_message(text=texto, chat_id=owner)
-            except Exception as t:
-                LOGGER.warning(str(t))
-        await super().stop()
-        LOGGER.info(msg="App Stopped.")
-        exit()
+async def stop(self, *args):
+    if owner != 0:
+        texto = f"BUGÜN BENİM ÖLÜM GÜNÜM.\nYAŞADIĞIM SÜRE: `{ReadableTime(time.time() - botStartTime)}`"
+        try:
+            if send_logs_when_dying:
+                await self.send_document(document='log.txt', caption=texto, chat_id=owner)
+            else:
+                await self.send_message(text=texto, chat_id=owner)
+        except Exception as t:
+            LOGGER.warning(str(t))
+    await super().stop()
+    LOGGER.info(msg="App Stopped.")
+    exit()
 
 app = Bot()
 app.run()
