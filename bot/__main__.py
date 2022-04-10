@@ -97,9 +97,9 @@ async def restart(_, m: Message):
             heroku_conn = heroku3.from_key(heroku_api_key)
             server = heroku_conn.app(heroku_app_name)
             server.restart() 
-    await restart_msg.edit('`Senin ellerinde can verdim kurt bakışlım.`')
-    time.sleep(2)
-    return output
+            await restart_msg.edit('`Senin ellerinde can verdim kurt bakışlım.`')
+            time.sleep(2)
+            return output
         else:
             await restart_message.edit("`Heroku Api Key ve uygulama adını ekleyin.`")
     except Exception as e:
