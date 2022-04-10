@@ -7,6 +7,7 @@ from pyrogram.raw.all import layer
 import logging
 import os
 import time
+from bot.utils import ReadableTime
 
 from pyrogram import filters
 from pyrogram.types import (
@@ -24,24 +25,6 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
     level=logging.INFO)
 LOGGER = logging.getLogger(__name__)
 botStartTime = time.time()
-
-def ReadableTime(seconds: int) -> str:
-    result = ''
-    (days, remainder) = divmod(seconds, 86400)
-    days = int(days)
-    if days != 0:
-        result += f'{days}d'
-    (hours, remainder) = divmod(remainder, 3600)
-    hours = int(hours)
-    if hours != 0:
-        result += f'{hours}h'
-    (minutes, seconds) = divmod(remainder, 60)
-    minutes = int(minutes)
-    if minutes != 0:
-        result += f'{minutes}m'
-    seconds = int(seconds)
-    result += f'{seconds}s'
-    return result
 
 video_mimetype = [
   "video/x-flv",
