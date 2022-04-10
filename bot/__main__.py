@@ -54,5 +54,4 @@ async def stop(self, *args):
     LOGGER.info(msg="App Stopped.")
     exit()
 
-app = Bot()
 app.run()
