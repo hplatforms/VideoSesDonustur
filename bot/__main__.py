@@ -96,16 +96,14 @@ async def restart(_, m: Message):
         if heroku_api_key is not None:
             heroku_conn = heroku3.from_key(heroku_api_key)
             server = heroku_conn.app(heroku_app_name)
-            server.restart()
+            server.restart() 
+    await restart_msg.edit('`Senin ellerinde can verdim kurt bakışlım.`')
+    time.sleep(2)
+    return output
         else:
             await restart_message.edit("`Heroku Api Key ve uygulama adını ekleyin.`")
     except Exception as e:
         await restart_message.edit(f"**İntihar bile edemedim:** `{e}`")
-
-        await restart_msg.edit('`Senin ellerinde can verdim kurt bakışlım.`')
-        return False
-    time.sleep(2)
-    return output
 
 @app.on_message(filters.video)
 def encode_video(app, message):
