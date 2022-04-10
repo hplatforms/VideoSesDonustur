@@ -104,6 +104,11 @@ def encode_video(app, message):
       add_task(message)
 
     async def start(self):
+        if not os.path.isdir(DOWNLOAD_LOCATION): os.makedirs(DOWNLOAD_LOCATION)
+        await super().start()
+        me = await self.get_me()
+        self.username = '@' + me.username
+        LOGGER.info(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
         if owner != 0:
             try:
                 await self.send_message(text="`SENİN GÜCÜN SAYESİNDE YENİDEN DOĞDUM SAHİP.`",
