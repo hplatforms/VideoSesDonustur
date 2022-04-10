@@ -56,7 +56,7 @@ def add_task(message: Message):
                         msg,
                         c_time
                     ))
-                    video.reply_text("`⚪️ Bu videonun sesi yoktu ama yine de kodladım.\n\n#bilgilendirme`", quote=True)
+            video.reply_text("`⚪️ Bu videonun sesi yoktu ama yine de kodladım.\n\n#bilgilendirme`", quote=True)
             except FloodWait as e:
                 print(f"Sleep of {e.x} required by FloodWait ...")
                 time.sleep(e.x)
