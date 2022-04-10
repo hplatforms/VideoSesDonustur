@@ -18,6 +18,12 @@ from bot.helper.utils import add_task
 from pyrogram.types.bots_and_keyboards import InlineKeyboardButton, InlineKeyboardMarkup
 from .translation import Translation
 
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[logging.FileHandler('log.txt'), logging.StreamHandler()],
+    level=logging.INFO)
+LOGGER = logging.getLogger(__name__)
+botStartTime = time.time()
+
 def ReadableTime(seconds: int) -> str:
     result = ''
     (days, remainder) = divmod(seconds, 86400)
