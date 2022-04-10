@@ -102,10 +102,10 @@ async def restart(_, m: Message):
     except Exception as e:
         await restart_message.edit(f"**İntihar bile edemedim:** `{e}`")
 
-            await restart_msg.edit('`Senin ellerinde can verdim kurt bakışlım.`')
-            return False
-        time.sleep(2)
-        return output
+        await restart_msg.edit('`Senin ellerinde can verdim kurt bakışlım.`')
+        return False
+    time.sleep(2)
+    return output
 
 @app.on_message(filters.video)
 def encode_video(app, message):
