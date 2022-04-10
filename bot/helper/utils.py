@@ -94,7 +94,7 @@ def add_task(message: Message):
                     # reply_markup=reply_markup,
                     progress=progress_for_pyrogram
                     )
-                )
+                    )
                 if log_channel:
                     await audio.copy(log_channel)
             elif tg_send_type == "vm":
