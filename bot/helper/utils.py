@@ -59,14 +59,8 @@ def add_task(message: Message):
                     ))
 
                 if LOG_CHANNEL:
-                    await document.copy(log_channel)
-                else:
-                width, height, duration = await VideoMetaData(download_directory)
-                if os.path.exists(thumb_image_path):
-                    thumb_image_path = thumb_image_path
-                else:
-                    thumb_image_path = await VideoThumb(bot, update, duration, download_directory)
-                await update.message.reply_to_message.reply_chat_action("upload_video")
+                        await document.copy(log_channel)
+                        await update.message.reply_to_message.reply_chat_action("upload_video")
                 video = await bot.send_video(
                     chat_id=update.message.chat.id,
                     video=new_file,
