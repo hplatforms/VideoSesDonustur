@@ -9,7 +9,7 @@ from pyrogram.types import (
 )
 from pyrogram import Client
 
-from bot import app, data, sudo_users, heroku_api_key, heroku_app_name
+from bot import app, data, sudo_users, heroku_api_key, heroku_app_name, owner, send_logs_when_dying
 from bot.helper.utils import add_task
 from pyrogram.types.bots_and_keyboards import InlineKeyboardButton, InlineKeyboardMarkup
 from .translation import Translation
@@ -48,29 +48,7 @@ def help_message(app, message):
             reply_to_message_id=message.message_id
         ) 
 
-   async def start(self):
-        if not os.path.isdir(DOWNLOAD_LOCATION): os.makedirs(DOWNLOAD_LOCATION)
-        await super().start()
-        me = await self.get_me()
-        self.username = '@' + me.username
-        LOGGER.info(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
-        if OWNER_ID != 0:
-            try:
-                await self.send_message(text="`SENİN GÜCÜN SAYESİNDE YENİDEN DOĞDUM SAHİP.`",
-                    chat_id=SUDO)
-            except Exception as t:
-                LOGGER.error(str(t))
-
-    async def stop(self, *args):
-        if SUDO != 0:
-            texto = f"BUGÜN BENİM ÖLÜM GÜNÜM.\nYAŞADIĞIM SÜRE: `{ReadableTime(time.time() - botStartTime)}`"
-            try:
-                if SEND_LOGS_WHEN_DYING:
-                    await self.send_document(document='log.txt', caption=texto, chat_id=OWNER_ID)
-                else:
-                    await self.send_message(text=texto, chat_id=SUDO)
-            except Exception as t:
-                LOGGER.warning(str(t))
+   
 
 @app.on_message(filters.command("restart") & filters.user(sudo_users))
 async def restart(_, m: Message):
@@ -96,5 +74,24 @@ def encode_video(app, message):
     data.append(message)
     if len(data) == 1:
       add_task(message)
+
+    async def start(self):
+        if owner != 0:
+            try:
+                await self.send_message(text="`SENİN GÜCÜN SAYESİNDE YENİDEN DOĞDUM SAHİP.`",
+                    chat_id=owner)
+            except Exception as t:
+                LOGGER.error(str(t))
+
+    async def stop(self, *args):
+        if owner != 0:
+            texto = f"BUGÜN BENİM ÖLÜM GÜNÜM.\nYAŞADIĞIM SÜRE: `{ReadableTime(time.time() - botStartTime)}`"
+            try:
+                if send_logs_when_dying:
+                    await self.send_document(document='log.txt', caption=texto, chat_id=owner)
+                else:
+                    await self.send_message(text=texto, chat_id=owner)
+            except Exception as t:
+                LOGGER.warning(str(t))
 
 app.run()
