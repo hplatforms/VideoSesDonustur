@@ -60,7 +60,7 @@ def add_task(message: Message):
 
                 if LOG_CHANNEL:
                     await document.copy(log_channel)
-            else:
+                else:
                 width, height, duration = await VideoMetaData(download_directory)
                 if os.path.exists(thumb_image_path):
                     thumb_image_path = thumb_image_path
