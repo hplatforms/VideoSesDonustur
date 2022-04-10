@@ -57,65 +57,6 @@ def add_task(message: Message):
                         msg,
                         c_time
                     ))
-
-                if LOG_CHANNEL:
-                        await document.copy(log_channel)
-                        await update.message.reply_to_message.reply_chat_action("upload_video")
-                video = await bot.send_video(
-                    chat_id=update.message.chat.id,
-                    video=new_file,
-                    caption=caption,
-                    duration=duration,
-                    width=width,
-                    height=height,
-                    supports_streaming=True,
-                    # reply_markup=reply_markup,
-                    thumb=thumb_image_path,
-                    reply_to_message_id=update.message.reply_to_message.message_id,
-                    progress=progress_for_pyrogram,
-                    parse_mode='html'
-                    )
-                    )
-                if log_channel:
-                    await video.copy(log_channel)
-
-            if tg_send_type == "audio":
-                duration = await AudioMetaData(download_directory)
-                thumbnail = await DocumentThumb(bot, update)
-                await update.message.reply_to_message.reply_chat_action("upload_audio")
-                audio = await bot.send_audio(
-                    chat_id=update.message.chat.id,
-                    audio=download_directory,
-                    caption=caption,
-                    parse_mode="HTML",
-                    duration=duration,
-                    thumb=thumbnail,
-                    reply_to_message_id=update.message.reply_to_message.message_id,
-                    # reply_markup=reply_markup,
-                    progress=progress_for_pyrogram
-                    )
-                    )
-                if log_channel:
-                    await audio.copy(log_channel)
-            elif tg_send_type == "vm":
-                width, duration = await VMMetaData(download_directory)
-                thumbnail = await VideoThumb(bot, update, duration, download_directory)
-                await update.message.reply_to_message.reply_chat_action("upload_video_note")
-                video_note = await bot.send_video_note(
-                    chat_id=update.message.chat.id,
-                    video_note=download_directory,
-                    duration=duration,
-                    length=width,
-                    thumb=thumbnail,
-                    reply_to_message_id=update.message.reply_to_message.message_id,
-                    # reply_markup=reply_markup,
-                    progress=progress_for_pyrogram
-                    )
-                    )
-                if log_channel:
-                    await video_note.copy(log_channel)
-                if audio_codec == []:
-
                     video.reply_text("`⚪️ Bu videonun sesi yoktu ama yine de kodladım.\n\n#bilgilendirme`", quote=True)
             except FloodWait as e:
                 print(f"Sleep of {e.x} required by FloodWait ...")
