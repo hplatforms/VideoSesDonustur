@@ -36,10 +36,10 @@ async def start(self):
         me = await self.get_me()
         self.username = '@' + me.username
         LOGGER.info(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
-        if owner != 0:
+        if sudo_users != 0:
             try:
                 await self.send_message(text="`SENİN GÜCÜN SAYESİNDE YENİDEN DOĞDUM SAHİP.`",
-                    chat_id=owner)
+                    chat_id=sudo_users)
             except Exception as t:
                 LOGGER.error(str(t))
 
@@ -47,10 +47,9 @@ async def stop(self, *args):
     if owner != 0:
         texto = f"BUGÜN BENİM ÖLÜM GÜNÜM.\nYAŞADIĞIM SÜRE: `{ReadableTime(time.time() - botStartTime)}`"
         try:
-            if send_logs_when_dying:
-                await self.send_document(document='log.txt', caption=texto, chat_id=owner)
+                await self.send_document(document='log.txt', caption=texto, chat_id=sudo_users)
             else:
-                await self.send_message(text=texto, chat_id=owner)
+                await self.send_message(text=texto, chat_id=sudo_users)
         except Exception as t:
             LOGGER.warning(str(t))
     await super().stop()
