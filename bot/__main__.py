@@ -48,7 +48,7 @@ async def stop(self, *args):
         texto = f"BUGÜN BENİM ÖLÜM GÜNÜM.\nYAŞADIĞIM SÜRE: `{ReadableTime(time.time() - botStartTime)}`"
         try:
                 await self.send_document(document='log.txt', caption=texto, chat_id=sudo_users)
-            else:
+        else:
                 await self.send_message(text=texto, chat_id=sudo_users)
         except Exception as t:
             LOGGER.warning(str(t))
