@@ -105,10 +105,10 @@ async def start(self):
         await super().start()
         self.username = '@' + me.username
         await self.send_message(text="{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.",
-                                chat_id=sudo_users)
+             chat_id=sudo_users)
         await self.send_message(text="`SENİN GÜCÜN SAYESİNDE YENİDEN DOĞDUM SAHİP.`",
-                                chat_id=sudo_users)
-        except Exception as t:
+            chat_id=sudo_users)
+    except Exception as t:
         await self.send_message(text="`{t}`",
                                 chat_id=sudo_users)
 
@@ -117,9 +117,10 @@ async def stop(self, *args):
         await self.send_document(document='log.txt', 
                                  caption=texto,
                                  chat_id=sudo_users)
-        except Exception as t:
+    except Exception as t:
         await self.send_message(text="`{t}`",
-                                chat_id=sudo_users)
+            chat_id=sudo_users)
+
     await super().stop()
     exit() 
 
