@@ -105,7 +105,7 @@ async def start(self):
         me = await self.get_me()
         self.username = '@' + me.username
         LOGGER.info(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
-                
+            try:  
                 await self.send_message(text="`SENİN GÜCÜN SAYESİNDE YENİDEN DOĞDUM SAHİP.`",
                     chat_id=sudo_users)
             except Exception as t:
