@@ -102,23 +102,21 @@ def encode_video(app, message):
 
 async def start(self):
         me = await self.get_me()
-        server.start()
+        await super().start()
         self.username = '@' + me.username
         await self.send_message(text="{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.",
                                 chat_id=sudo_users)
-        if sudo_users != 0:
-            try:
                 await self.send_message(text="`SENİN GÜCÜN SAYESİNDE YENİDEN DOĞDUM SAHİP.`",
-                    chat_id=sudo_users)
+                                        chat_id=sudo_users)
             except Exception as t:
                 await self.send_message(text="`{t}`",
                                         chat_id=sudo_users)
 
 async def stop(self, *args):
-    if owner != 0:
         texto = f"BUGÜN BENİM ÖLÜM GÜNÜM.\nYAŞADIĞIM SÜRE: `{ReadableTime(time.time() - botStartTime)}`"
-        try:
-                await self.send_document(document='log.txt', caption=texto, chat_id=sudo_users)
+                await self.send_document(document='log.txt', 
+                                         caption=texto,
+                                         chat_id=sudo_users)
         except Exception as t:
                 await self.send_message(text="`{t}`",
                                         chat_id=sudo_users)
