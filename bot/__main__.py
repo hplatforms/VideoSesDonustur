@@ -19,8 +19,6 @@ from bot import app, data, sudo_users, heroku_api_key, heroku_app_name, owner, s
 from bot.helper.utils import add_task
 from pyrogram.types.bots_and_keyboards import InlineKeyboardButton, InlineKeyboardMarkup
 from .translation import Translation
-
-from config import OWNER_ID
 from pyrogram import Client, filters
 
 import logging
