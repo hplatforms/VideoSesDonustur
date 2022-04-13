@@ -120,4 +120,7 @@ async def stop(self, *args):
             LOGGER.warning(str(t))
     await super().stop()
     LOGGER.info(message="App Stopped.")
-    app.run()
+    exit() 
+
+app.run()
+
