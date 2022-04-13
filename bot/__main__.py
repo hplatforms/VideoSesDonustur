@@ -113,15 +113,15 @@ async def start(self):
                 LOGGER.error(str(t))
 
 async def stop(self, *args):
-    if OWNER_ID != 0:
-            texto = f"Son nefesimi verdim.\nÖldüğümde yaşım: {ReadableTime(time.time() - botStartTime)}"
-            try:
-                    await self.send_document(document='log.txt', caption=texto, chat_id=OWNER_ID)
-            except Exception as t:
-                LOGGER.warning(str(t))
-        await super().stop()
-        LOGGER.info(msg="App Stopped.")
-        exit()
+    if sudo_users!= 0:
+        texto = f"Son nefesimi verdim.\nÖldüğümde yaşım: {ReadableTime(time.time() - botStartTime)}"
+        try:
+                await self.send_document(document='log.txt', caption=texto, chat_id=OWNER_ID)
+        except Exception as t:
+            LOGGER.warning(str(t))
+    await super().stop()
+    LOGGER.info(msg="App Stopped.")
+    exit()
 
 
 app.run()
