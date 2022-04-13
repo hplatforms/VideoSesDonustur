@@ -111,9 +111,9 @@ async def start(self):
                     chat_id=sudo_users)
             except Exception as t:
                 LOGGER.error(str(t))
-                    chat_id=sudo_users)
 
 async def stop(self, *args):
+    if OWNER_ID != 0:
             texto = f"Son nefesimi verdim.\nÖldüğümde yaşım: {ReadableTime(time.time() - botStartTime)}"
             try:
                     await self.send_document(document='log.txt', caption=texto, chat_id=OWNER_ID)
