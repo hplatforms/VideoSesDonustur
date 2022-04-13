@@ -99,16 +99,13 @@ def encode_video(app, message):
     if len(data) == 1:
       add_task(message)
 
-@app.on_message(filters.command("bilgi"))
-async def bilgi(self):
-        await super().start()
+
+async def start(self):
         me = await self.get_me()
+        server.start()
         self.username = '@' + me.username
         await self.send_message(text="{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.",
                                 chat_id=sudo_users)
-        
-
-
         if sudo_users != 0:
             try:
                 await self.send_message(text="`SENİN GÜCÜN SAYESİNDE YENİDEN DOĞDUM SAHİP.`",
