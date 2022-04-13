@@ -47,7 +47,7 @@ video_mimetype = [
   "video/mpeg"
   ]
 
-@app.on_message(filters.command('log') & filters.user(sudo_users))
+@app.on_message(filters.command('log'))
 async def sendLogs(client, message):
     with open('log.txt', 'rb') as f:
         try:
