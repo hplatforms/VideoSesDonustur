@@ -20,9 +20,14 @@ from bot.helper.utils import add_task
 from pyrogram.types.bots_and_keyboards import InlineKeyboardButton, InlineKeyboardMarkup
 from .translation import Translation
 
+from config import OWNER_ID
+from pyrogram import Client, filters
+
+import logging
+
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[logging.FileHandler('log.txt'), logging.StreamHandler()],
-    level=logging.INFO)
+                    handlers=[logging.FileHandler('log.txt'), logging.StreamHandler()],
+                    level=logging.INFO)
 LOGGER = logging.getLogger(__name__)
 botStartTime = time.time()
 
@@ -71,6 +76,16 @@ video_mimetype = [
   "video/quicktime",
   "video/mpeg"
   ]
+
+@app.on_message(filters.command('log') & filters.user(sudo_users))
+async def sendLogs(client, message):
+    with open('log.txt', 'rb') as f:
+        try:
+            await client.send_document(document=f,
+                                       file_name=f.name, reply_to_message_id=message.message_id,
+                                       chat_id=message.chat.id, caption=f.name)
+        except Exception as e:
+            await message.reply_text(str(e))
 
 @app.on_message(filters.command('start'))
 def help_message(app, message):
