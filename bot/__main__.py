@@ -29,31 +29,6 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 LOGGER = logging.getLogger(__name__)
 botStartTime = time.time()
 
-
-async def start(self):
-        if not os.path.isdir(DOWNLOAD_LOCATION): os.makedirs(DOWNLOAD_LOCATION)
-        await super().start()
-        me = await self.get_me()
-        self.username = '@' + me.username
-        LOGGER.info(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
-        if sudo_users != 0:
-            try:
-                await self.send_message(text="`SENİN GÜCÜN SAYESİNDE YENİDEN DOĞDUM SAHİP.`",
-                    chat_id=sudo_users)
-            except Exception as t:
-                LOGGER.error(str(t))
-
-async def stop(self, *args):
-    if owner != 0:
-        texto = f"BUGÜN BENİM ÖLÜM GÜNÜM.\nYAŞADIĞIM SÜRE: `{ReadableTime(time.time() - botStartTime)}`"
-        try:
-                await self.send_document(document='log.txt', caption=texto, chat_id=sudo_users)
-        except Exception as t:
-            LOGGER.warning(str(t))
-    await super().stop()
-    LOGGER.info(msg="App Stopped.")
-    exit()
-
 video_mimetype = [
   "video/x-flv",
   "video/mp4",
@@ -124,4 +99,26 @@ def encode_video(app, message):
     if len(data) == 1:
       add_task(message)
 
-app.run()
+async def start(self):
+        await super().start()
+        me = await self.get_me()
+        self.username = '@' + me.username
+        LOGGER.info(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
+        if sudo_users != 0:
+            try:
+                await self.send_message(text="`SENİN GÜCÜN SAYESİNDE YENİDEN DOĞDUM SAHİP.`",
+                    chat_id=sudo_users)
+            except Exception as t:
+                LOGGER.error(str(t))
+
+async def stop(self, *args):
+    if owner != 0:
+        texto = f"BUGÜN BENİM ÖLÜM GÜNÜM.\nYAŞADIĞIM SÜRE: `{ReadableTime(time.time() - botStartTime)}`"
+        try:
+                await self.send_document(document='log.txt', caption=texto, chat_id=sudo_users)
+        except Exception as t:
+            LOGGER.warning(str(t))
+    await super().stop()
+    LOGGER.info(message="App Stopped.")
+    exit() 
+    app.run()
