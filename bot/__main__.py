@@ -113,13 +113,13 @@ async def start(self):
                     chat_id=sudo_users)
 
 async def stop(self, *args):
-        texto = f"BUGÜN BENİM ÖLÜM GÜNÜM.\nYAŞADIĞIM SÜRE: `{ReadableTime(time.time() - botStartTime)}`"
-                await self.send_document(document='log.txt', caption=texto, chat_id=sudo_users)
+            texto = f"BUGÜN BENİM ÖLÜM GÜNÜM.\nYAŞADIĞIM SÜRE: `{ReadableTime(time.time() - botStartTime)}`"
+                    await self.send_document(document='log.txt', caption=texto, chat_id=sudo_users)
             except Exception as t:
                 LOGGER.warning(str(t))
-            await super().stop() 
-            LOGGER.info=(msg="app stopped.") 
-            exit() 
+        await super().stop() 
+        LOGGER.info=(msg="app stopped.") 
+        exit() 
 
 app.run()
 
