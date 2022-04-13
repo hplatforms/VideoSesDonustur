@@ -100,7 +100,7 @@ def encode_video(app, message):
       add_task(message)
 
 
- async def start(self):
+async def start(self):
         await super().start()
         me = await self.get_me()
         self.username = '@' + me.username
@@ -112,8 +112,9 @@ def encode_video(app, message):
                 LOGGER.error(str(t))
                     chat_id=sudo_users)
 
- async def stop(self, *args):
+async def stop(self, *args):
         texto = f"BUGÜN BENİM ÖLÜM GÜNÜM.\nYAŞADIĞIM SÜRE: `{ReadableTime(time.time() - botStartTime)}`"
+        try: 
                 await self.send_document(document='log.txt', caption=texto, chat_id=sudo_users)
         except Exception as t:
             LOGGER.warning(str(t))
