@@ -108,7 +108,7 @@ async def start(self):
                                 chat_id=sudo_users)
         await self.send_message(text="`SENİN GÜCÜN SAYESİNDE YENİDEN DOĞDUM SAHİP.`",
                                 chat_id=sudo_users)
-    except Exception as t:
+        except Exception as t:
         await self.send_message(text="`{t}`",
                                 chat_id=sudo_users)
 
@@ -117,7 +117,7 @@ async def stop(self, *args):
         await self.send_document(document='log.txt', 
                                  caption=texto,
                                  chat_id=sudo_users)
-    except Exception as t:
+        except Exception as t:
         await self.send_message(text="`{t}`",
                                 chat_id=sudo_users)
     await super().stop()
