@@ -109,7 +109,8 @@ async def start(self):
                 await self.send_message(text="`SENİN GÜCÜN SAYESİNDE YENİDEN DOĞDUM SAHİP.`",
                     chat_id=sudo_users)
             except Exception as t:
-                LOGGER.error(str(t))
+                await self.send_message(text="`{t}`",
+                                        chat_id=sudo_users)
 
 async def stop(self, *args):
     if owner != 0:
@@ -117,9 +118,9 @@ async def stop(self, *args):
         try:
                 await self.send_document(document='log.txt', caption=texto, chat_id=sudo_users)
         except Exception as t:
-            LOGGER.warning(str(t))
+                await self.send_message(text="`{t}`",
+                                        chat_id=sudo_users)
     await super().stop()
-    LOGGER.info(message="App Stopped.")
     exit() 
 
 app.run()
