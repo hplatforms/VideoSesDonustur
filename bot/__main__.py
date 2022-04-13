@@ -100,7 +100,7 @@ def encode_video(app, message):
       add_task(message)
 
 @app.on_message(filters.command("bilgi"))
-async def start(self):
+async def bilgi(self):
         await super().start()
         me = await self.get_me()
         self.username = '@' + me.username
