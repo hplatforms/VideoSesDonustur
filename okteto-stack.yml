@@ -1,5 +1,5 @@
 services:
-  drone-vc-p:
+  vbot:
     build: .
     environment:
       API_ID: $APP_ID  
