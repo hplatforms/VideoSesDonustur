@@ -15,7 +15,7 @@ from pyrogram.types import (
 )
 from pyrogram import Client
 
-from bot import app, data, sudo_users, heroku_api_key, heroku_app_name, owner, send_logs_when_dying
+from bot import app, data, sudo_users, heroku_api_key, heroku_app_name, send_logs_when_dying
 from bot.helper.utils import add_task
 from pyrogram.types.bots_and_keyboards import InlineKeyboardButton, InlineKeyboardMarkup
 from .translation import Translation
